@@ -16,3 +16,6 @@
 
 # test file
 *.yaml
+
+# 测试文件夹
+apptest/
