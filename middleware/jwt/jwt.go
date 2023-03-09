@@ -23,11 +23,11 @@ var (
 
 	// ErrTokenInvalid is the error value that it's returned when
 	// a token is not valid.
-	// ErrTokenInvalid = errors.New("token is invalid")
+	ErrTokenInvalid = errors.New("token is invalid")
 
 	// // ErrTokenExpired is the error value that it's returned when
 	// // a token value is found and it's valid but it's expired.
-	// ErrTokenExpired = errors.New("token is expired")
+	ErrTokenExpired = errors.New("token is expired")
 )
 
 type (
@@ -171,14 +171,14 @@ func (m *Middleware) CheckJWT(ctx iris.Context) error {
 	parsedToken, err := jwtParser.ParseWithClaims(token, &MyClaims{}, m.Config.ValidationKeyGetter)
 	if err != nil {
 		logf(ctx, "Error parsing token: %v", err)
-		return errors.New("token 无效")
+		return ErrTokenInvalid
 	}
 	if m.Config.SigningMethod != nil && m.Config.SigningMethod.Alg() != parsedToken.Header["alg"] {
 		err := fmt.Errorf("expected %s signing method but token specified %s",
 			m.Config.SigningMethod.Alg(),
 			parsedToken.Header["alg"])
 		logf(ctx, "Error validating token algorithm: %v", err)
-		return errors.New("token 无效")
+		return ErrTokenInvalid
 	}
 	// 解析token数据
 	claims, ok := parsedToken.Claims.(*MyClaims)

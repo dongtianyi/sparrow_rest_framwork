@@ -32,8 +32,8 @@ type Config struct {
 }
 
 // wanxiang的token payload
-// type MyClaims struct {
-// 	*jwt.RegisteredClaims
-// 	// Username string `json:"username"`
-// 	Uid int `json:"uid"`
-// }
+type MyClaims struct {
+	*jwt.RegisteredClaims
+	// Username string `json:"username"`
+	Uid int `json:"uid"`
+}
