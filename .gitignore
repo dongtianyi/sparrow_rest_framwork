@@ -16,7 +16,10 @@
 
 # test file
 *.yaml
+local_dev.sh
 
 # 测试文件夹
 # apptest/
 gin-bin
+
+vendor/

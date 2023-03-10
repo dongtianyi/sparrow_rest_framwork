@@ -2,6 +2,8 @@ package main
 
 import (
 	"sparrow_rest_framework/apptest"
+	"sparrow_rest_framework/database"
+	"sparrow_rest_framework/settings"
 
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/middleware/logger"
@@ -9,11 +11,15 @@ import (
 )
 
 func main() {
-	// app := newApp()
 	// 初始化 settings
-	// settings.Init()
-	// xx := settings.GetString("XX")
-	// print(xx)
+	settings.Init()
+	dbUser := settings.GetString("DATABASE_USER")
+	dbPwd := settings.GetString("DATABASE_PASSWORD")
+	dbHost := settings.GetString("DATABASE_HOST")
+	dbPort := settings.GetString("DATABASE_PORT")
+	dbName := settings.GetString("DATABASE_DBNAME")
+	database.InitDb(dbUser, dbPwd, dbHost, dbPort, dbName)
+
 	app := iris.New()
 	app.Logger().SetLevel("debug")
 	app.Use(recover.New())

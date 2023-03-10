@@ -1,8 +1,8 @@
 package rest_framwork
 
 /*
-	
-*/
+
+ */
 
 type ResultData struct {
 	Code    int         `json:"code"`    // 业务code
@@ -11,7 +11,11 @@ type ResultData struct {
 }
 
 // 封装http请求统一返回的数据结构
-func ResponseResult(data interface{}, code int, msg string) ResultData {
+func ResponseResult(data interface{}, code int, err error) ResultData {
+	msg := ""
+	if err != nil {
+		msg = err.Error()
+	}
 	return ResultData{
 		Code:    code,
 		Message: msg,

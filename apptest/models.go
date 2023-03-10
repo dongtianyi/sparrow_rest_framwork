@@ -1,11 +1,16 @@
 package apptest
 
-type TestModel struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
+type PdtPdt struct {
+	ID int `json:"id" gorm:"primaryKey"`
+	// CreatedAt ccldatatypes.CCLTime  `json:"created_at" gorm:"autoCreateTime"`
+	// IsDel     soft_delete.DeletedAt `json:"is_del" gorm:"softDelete:flag"`
+	PdtclsID int    `json:"pdtcls_id" validate:"required"`
+	ShopID   int    `json:"shop_id" validate:"required"`
+	Title    string `json:"title" validate:"required"`
+	SubTitle string `json:"sub_title"`
+	Desc     string `json:"desc"`
+	ImgID    int    `json:"img_id"`
 }
 
-func (t *TestModel) Get(id int) {
-	t.Id = id
-	t.Name = "我是数据"
+func (t *PdtPdt) Get(id int) {
 }
